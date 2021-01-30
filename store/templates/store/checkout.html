@@ -1,0 +1,72 @@
+{% extends "menu.html" %}
+{% load static %}
+{% block title %}
+<title>CHECKOUT </title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-lg-6">
+		<div class="box-element" id="form-wrapper" style="background-color:rgb(54, 55, 56);">
+                <p><u><strong>Shipping Information</strong></u></p>
+            <hr>
+            <form id="form" action="{% url 'shippingaddress' 'request.user' '' %}" method="POST">
+                {% csrf_token %}
+                <div id="user-info">
+                    <div class="form-field">
+                        <input required class="form-control" type="text" name="name" placeholder="Name..">
+                    </div>
+                    <div class="form-field">
+                        <input required class="form-control" type="email" name="email" placeholder="Email..">
+                    </div>
+                </div>
+                
+                <div id="shipping-info">
+                    
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="address" placeholder="Address..">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="city" placeholder="City..">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="state" placeholder="State..">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+                    </div>
+                </div>
+                <hr>
+                <input id="form-button" class="btn btn-success btn-block" type="submit" valur="Continue"></input>
+            </form>
+		</div>
+
+        <br>
+        <div class="box-element hidden" id="payment-info">
+            <small>Paytm Options</small>
+        </div>
+        
+    </div>
+
+    <div class="col-lg-6">
+        <div class="box-element" style="background-color:rgb(54, 55, 56);">
+            
+            <p><u><strong> Summary</strong></u></p>
+            <hr>{% for item in data %}
+
+            <div class="cart-row">
+                <div style="flex:2"><img class="row-image" src="{{item.product.image.url}}"/></div>
+                <div style="flex:2"><p>{{item.product.name}}</p></div>
+                <div style="flex:1"><p>₹ {{item.product.price}}</p></div>
+                <div style="flex:1"><p>x{{item.quantity}}</p></div>
+                <div style="flex:1"><p>₹ {{item.get_total}}</p></div>
+            </div>
+            {% endfor %}
+            <p>Items: {{order.get_cart_items}}</p>
+            <p>Total: ₹{{order.get_cart_total}}</p>
+        </div>
+    </div>
+</div>
+  
+{% endblock content %}

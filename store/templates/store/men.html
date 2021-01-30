@@ -1,0 +1,62 @@
+{% extends "menu.html" %}
+{% load static %}
+{% block title %}
+<title>MEN </title>
+{% endblock title %}
+
+{% block content %}
+<!--SHOW PRODUCTS---------------------------->
+<div class="row">
+    {% for product in prod %}
+    <div class="col-lg-4">
+        
+        <img class="thumbnail"  src="{{product.image.url}}">
+	    <div class="box-element product">
+            <h6><strong>{{product.name}}</strong>
+            <strong>{{product.price}}</strong></h6> 
+            <hr>
+            
+
+            <!--<a class="btn btn-outline-secondary add-btn update-cart" href="{{product.get_add_to_cart_url}}">Add to Cart</a>-->
+            
+            
+            <a href="{{product.get_add_to_cart_url}}" class="btn btn-primary btn-md my-0 p">
+            Add to Cart
+            </a>
+            <a href="{{product.get_remove_from_cart_url}}" class="btn btn-primary btn-md my-0 p">
+                Remove to Cart
+                </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<!--PAGINATION---------------------------->
+
+<!--FIRST PAGE---------------------------->
+{% if page_obj.number != 1  %}
+        <a href="/men/?page=1">First Page|</a>
+{% endif %}
+<!--PREVIOUS PAGE---------------------------->
+{% if page_obj.has_previous %}
+        <a href="/men/?page={{page_obj.previous_page_number}}"> Previous<--</a>
+{% endif %}
+<!--PAGE NUMBER---------------------------->
+{% for page in page_obj.paginator.page_range %}
+     {% if page_obj.number == page %}
+        |<strong>{{page}}</strong>
+    {% else %}
+        |<a href="/men/?page={{page}}">
+           {{page}}
+        </a>
+    {% endif %}  
+{% endfor %}
+<!--NEXT PAGE---------------------------->
+{% if page_obj.has_next %}
+        |<a href="/men/?page={{page_obj.next_page_number}}">-->Next</a>
+{% endif %}
+<!--LAST PAGE---------------------------->
+{% if page_obj.number != page_obj.paginator.num_pages %}
+        |<a href="/men/?page={{page_obj.paginator.num_pages}}">Last Page</a>
+{% endif %}
+
+{% endblock content %}

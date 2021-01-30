@@ -1,0 +1,14 @@
+{% extends "menu.html" %}
+{% block content %}
+<h1>signup</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Signup">
+</form>
+{% if msg %}
+<h1>{{msg}}</h1>
+  
+{% endif %}
+
+{% endblock content %}

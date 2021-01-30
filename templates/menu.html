@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        {% block title %}
+        {% endblock title %}        
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/icon.png' %}" width="60"/></a>
+        
+    
+       
+              {% if request.user.is_authenticated %}
+              <a class="nav-link" href="{% url 'men' %}">MEN</a>
+                    <!--<li><a class="nav-link" href="{% url 'men' %}">WOMEN </a></li>
+                    <li><a class="nav-link" href="{% url 'men' %}">KIDS </a></li>-->
+                <a href="{% url 'logout' %}">LOGOUT</a>|
+                <a href="{% url 'cart' %}">
+                <img  id="cart-icon" src="{% static 'images/cart.png' %}">
+                </a>
+                <p id="cart-total">0</p>
+             
+              
+              {% else %}
+              
+                <a href="{% url 'login' %}">LOGIN</a>|
+                <a href="{% url 'signup' %}">SIGN UP</a>
+              
+    
+               {% endif %}
+             
+             
+            
+    
+          
+        
+      </nav>
+    
+         <div class="container">
+                <br>
+                {% block content %}
+    
+    
+                {% endblock content %}
+             </div>
+    
+    
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script><!------------------------------------------------------------------------------------------>
+      <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4">
+<!-- Grid row -->
+<div class="row">
+      <!-- Content -->
+      
+      <h5>-----ECOMMERCE WEBSITE-----</h5>
+      <hr>
+      <p>If you would like to experience the best of online shopping for men, women and kids in India, you are at the right place. Myntra is the ultimate destination for fashion and lifestyle, being host to a wide array of merchandise including clothing, footwear, accessories, jewellery, personal care products and more. It is time to redefine your style statement with our treasure-trove of trendy items. Our online store brings you the latest in designer products straight out of fashion houses. You can shop online at Myntra from the comfort of your home and get your favourites delivered right to your doorstep.</p>
+      <hr>
+</div>
+
+
+
+    </body>
+</html>
