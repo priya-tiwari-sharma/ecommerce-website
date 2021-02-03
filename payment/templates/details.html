@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+</head>
+<body>
+    <table border="2px" width="500px">
+        <tr>
+            <th>Order Id</th>
+            <th>Customer Name</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td>{{order}}</td>
+            <td>{{customer}}</td>
+            
+            <td>{{order.get_cart_total}}</td>
+        </tr>
+        <tr><td><a href="{% url 'process' order %}"> Continue </a></td></tr>
+          
+    
+    </table>
+</body>
+</html>

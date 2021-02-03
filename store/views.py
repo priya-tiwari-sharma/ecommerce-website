@@ -21,6 +21,7 @@ class menList(ListView):
     template_name='store/men.html'
     paginate_by=3
 
+@login_required
 def cart(request):
 
     customer=request.user.customer 
@@ -28,7 +29,8 @@ def cart(request):
     customer_data=Customer.objects.filter(name=customer)
     customer_id=customer_data[0].id
     print("customer_id-------",customer_id)
-    order,created=Order.objects.get_or_create(customer_id=customer_id)
+    order,created=Order.objects.get_or_create(customer_id=customer_id,ordered=False)
+    
     items=order.orderitem_set.all()
     #order_id=orders[0].id
     #print("orders-------",orders)
@@ -42,14 +44,14 @@ def cart(request):
     )
     
     
-
+@login_required
 def checkout(request):
     customer=request.user.customer 
     print("customer-------",customer)
     customer_data=Customer.objects.filter(name=customer)
     customer_id=customer_data[0].id
     print("customer_id-------",customer_id)
-    order,created=Order.objects.get_or_create(customer_id=customer_id)
+    order,created=Order.objects.get_or_create(customer_id=customer_id,ordered=False)
     items=order.orderitem_set.all()
     context={'data':items,'order':order}
     return render(
@@ -58,13 +60,17 @@ def checkout(request):
         context
     )
 
-def shippingaddress(request):
+@login_required
 
+def shippingaddress(request):
+    cust=Customer.objects.get(name=request.user),
+    order=Order.objects.get(customer=cust[0].id,ordered=False)
     if request.method=='POST':
-        print("shipping2=========")
+        
         #foreign key value is not given yet
-        ShippingAddress.objects.create(
-           
+        ShippingAddress.objects.get_or_create(
+            Customer_id=cust[0].id,
+            order_id=order.id,
             name=request.POST.get('name'),
             email=request.POST.get('email'),
             address=request.POST.get('address'),
@@ -73,12 +79,11 @@ def shippingaddress(request):
             zipcode=request.POST.get('zipcode')
             
         )
+        context={'order': order ,'customer':cust[0].name}
         return render(
             request,
-            'process.html',
-            {
-                'data':1100    #dummy data  
-            }
+            'details.html',
+            context
         )
     else:
         return render(
@@ -87,7 +92,7 @@ def shippingaddress(request):
             {}
         )
 
-
+@login_required
 def add_to_cart(request,slug):
     print("slug=======",slug)
     customer=request.user.customer 
@@ -128,36 +133,4 @@ def add_to_cart(request,slug):
         messages.info(request, "This item was added to your cart.")
         return redirect("men")
       
-    
-
-"""  
-def remove_from_cart(request,slug):
-    print("slug=======",slug)
-    customer=request.user.customer 
-    customer_data=Customer.objects.filter(name=customer)
-    customer_id=customer_data[0].id
-     
-    product = get_object_or_404(Product, slug=slug)
-    order_qs = Order.objects.get_or_create(customer_id=customer_id, ordered=False) #check customer order 
-   
-    if order_qs:
-        order_item, created = Orderitem.objects.get(
-        product_id=product.id,
-        order_id=order_qs[0].id,        
-    )
-        # check if the order item is in the order
-        if Orderitem.objects.filter(product_id=product.id):
-            order_item.quantity -= 1
-            order_item.save()
-            messages.info(request, "This item quantity was updated.")
-            return redirect("men")
-        else:
-           
-            messages.info(request, "This item was not in your cart")
-            return redirect("men")
-        
-    else:
-        
-        messages.info(request, "You do not have an active order")
-        return redirect("men")
-""" 
+  

@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import SET_NULL
 from django.db.models.signals import post_save  #signal
-from django.core.mail import EmailMultiAlternatives #email html page
+from django.core.mail import EmailMultiAlternatives
+from django.http import request #email html page
 from django.template.loader import render_to_string
 from django.urls import resolvers # render  html email text  
 from django.utils.html import strip_tags # remove html tag 
@@ -125,16 +126,46 @@ def Product_Add_Signal(sender,instance,**kwargs):
    
 post_save.connect(Product_Add_Signal,sender=Product)    
 
-
-
-#sucessfully placed order
 """
+#sucessfully placed order
 def Bill_Generate_Signal(sender,instance,**kwargs):
-    print("Your order has been placed successfully") 
+    if kwargs['created']:
+        subject="Your order has been placed successfully"
+        
+         
+        from_email="priyatiwari9424@gmail.com"
+        customer= Customer.objects.get(Customer=request.user)
+        order=Order.objects.get(Customer=customer)
+        orderitem=Orderitem.objects.filter(order=order)
+        shippingaddress=ShippingAddress.objects.filter(order=order)
+        to=customer.email
+        html_content=render_to_string(
+            "store/email.html",
+            {
+                "order":order,
+                'customer':customer,
+                'orderitem':orderitem,
+                'shippingaddress':shippingaddress,
+
+
+
+
+            }
+        )
+        text_content=strip_tags(html_content)
+        msg=EmailMultiAlternatives(
+            subject,
+            text_content,
+            from_email,
+            [to]
+        )
+        msg.attach_alternative(html_content,"text/html")
+        msg.send()
+    print() 
 
 post_save.connect(Bill_Generate_Signal,sender=Order)
-"""
 
+"""
     
 
 

@@ -11,7 +11,7 @@
 		<div class="box-element" id="form-wrapper" style="background-color:rgb(54, 55, 56);">
                 <p><u><strong>Shipping Information</strong></u></p>
             <hr>
-            <form id="form" action="{% url 'shippingaddress' 'request.user' '' %}" method="POST">
+            <form id="form" action="{% url 'shippingaddress' %}" method="POST">
                 {% csrf_token %}
                 <div id="user-info">
                     <div class="form-field">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <hr>
-                <input id="form-button" class="btn btn-success btn-block" type="submit" valur="Continue"></input>
+                <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue"></input>
             </form>
 		</div>
 
