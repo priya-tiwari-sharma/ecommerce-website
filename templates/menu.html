@@ -11,14 +11,12 @@
     </head>
     <body>
       <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/icon.png' %}" width="60"/></a>
+        <a class="navbar-brand " href="{% url 'home' %}"><img src="{% static 'images/icon.png' %}" width="60"/></a>
         
     
        
               {% if request.user.is_authenticated %}
               <a class="nav-link" href="{% url 'men' %}">MEN</a>
-                    <!--<li><a class="nav-link" href="{% url 'men' %}">WOMEN </a></li>
-                    <li><a class="nav-link" href="{% url 'men' %}">KIDS </a></li>-->
                 <a href="{% url 'logout' %}">LOGOUT</a>|
                 <a href="{% url 'cart' %}">
                 <img  id="cart-icon" src="{% static 'images/cart.png' %}">
@@ -55,19 +53,73 @@
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script><!------------------------------------------------------------------------------------------>
-      <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
-<!-- Footer -->
-<footer class="page-footer font-small blue pt-4">
-<!-- Grid row -->
-<div class="row">
-      <!-- Content -->
-      
-      <h5>-----ECOMMERCE WEBSITE-----</h5>
-      <hr>
-      <p>If you would like to experience the best of online shopping for men, women and kids in India, you are at the right place. Myntra is the ultimate destination for fashion and lifestyle, being host to a wide array of merchandise including clothing, footwear, accessories, jewellery, personal care products and more. It is time to redefine your style statement with our treasure-trove of trendy items. Our online store brings you the latest in designer products straight out of fashion houses. You can shop online at Myntra from the comfort of your home and get your favourites delivered right to your doorstep.</p>
-      <hr>
-</div>
+     
 
+ <!-- Site footer -->
+ <footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        
+
+        <div class="col-xs-6 col-md-3">
+          <h6>Categories</h6>
+          <ul class="footer-links">
+            <li><a href="#">MEN</a></li>
+            <li><a href="#">WOMEN</a></li>
+            <li><a href="#">KIDS</a></li>
+            <li><a href="#">HOME DECORE</a></li>
+            <li><a href="#">MAKEUP</a></li>
+            <li><a href="#">PLANTS</a></li>
+          </ul>
+        </div>
+
+        <div class="col-xs-6 col-md-3">
+          <h6>Quick Links</h6>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Contribute</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Sitemap</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Contribute</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+          <div class="col-xs-6 col-md-3">
+            <h6>Categories</h6>
+            <ul class="footer-links">
+              <li><a href="#">MEN</a></li>
+              <li><a href="#">WOMEN</a></li>
+              <li><a href="#">KIDS</a></li>
+              <li><a href="#">HOME DECORE</a></li>
+              <li><a href="#">MAKEUP</a></li>
+              <li><a href="#">PLANTS</a></li>
+            </ul>
+          </div>
+      </div>
+      <hr>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12">
+          <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by 
+       <a href="#">THEECOMMERCEWEBAPP</a>.
+          </p>
+        </div>
+
+        
+      </div>
+    </div>
+</footer>
+  <!-- End Footer  -->
 
 
     </body>

@@ -1,15 +1,27 @@
 {% extends "menu.html" %}
+{% load static %}
 {% block content %}
-<h1>signup</h1>
-<form action="" method="post">
-    
-    {% csrf_token %}
-   {{form.as_p}}
-    <input type="submit" value="Signup">
-</form>
-{% if msg %}
-<h1>{{msg}}</h1>
-  
-{% endif %}
+<div class="row">
+	<div class="col-lg-6">
+		<div >
+            <img src="{% static 'images/1.jpg' %}" alt="Ecommerce" width="400" height="400" />
+		</div>
+    </div>
 
+    <div class="col-lg-6">
+        <div class="box-element" style="background-color:rgb(54, 55, 56);">
+            <h1>Signup</h1>
+            <form action="" method="post">
+                
+                {% csrf_token %}
+               {{form.as_p}}
+                <input type="submit" value="Signup">
+            </form>
+            {% if msg %}
+            <h1>{{msg}}</h1>
+              
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock content %}
